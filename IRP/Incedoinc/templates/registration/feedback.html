@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Candidate feedback {{candiate.id}}
+{% endblock %}
+
+{% block body %}
+<h2>Incedo Recruitment Portal<h2>
+<h3>Candidate feedback <h3>
+
+<div>
+  <ul>
+    {{feedback}}
+  </ul>
+
+</div>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<div>
+  <form name='feedback_form' method="POST">{% csrf_token %} <!# action takes us to the name of that url>
+    <label for="candidate_email">Candidate Email*:</label>
+    <input type="text" id="candidate_email" name="candidate_email"><br/>
+
+    <label for="interviewer_code">interviewer Code*:</label>
+    <input type="text" id="interviewer_code" name="interviewer_code"><br>
+
+    <label for="level_">Level</label>
+    <input type="number" id="level_" name=level_"><br>
+
+    <label for="status_">Status</label>
+    <input type="text" id="status_" name="status_"><br>
+
+    <label for="ratingPython_">Python Rating Out of 5: </label>
+    <input type="number" id="ratingPython_" name="ratingPython_"><br>
+
+    <label for="ratingJava_">JAVA Rating Out of 5:</label>
+    <input type="number" id="ratingJava_" name="ratingJava_"><br>
+
+    <label for="ratingCPP_">CPP Rating Out of 5:</label>
+    <input type="number" id="ratingCPP_" name="ratingCPP_"><br>
+
+    <label for="ratingSQL_">SQL Rating Out of 5:</label>
+    <input type="number" id="ratingSQL_" name="ratingSQL_"><br><br/>
+
+    Enter your feedback here: <br/>
+    <textarea rows = "5" cols = "60" name = "description">
+    </textarea><br/>
+    <button type="submit" class = "addBtn" value="Submit">Submit</button>
+  </form>
+<div>
+
+
+
+{% endblock %}

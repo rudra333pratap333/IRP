@@ -9,7 +9,7 @@ class Employee(models.Model):
     tempPassword = models.CharField(max_length=64)
 
     def __str__(self):
-        return f'{name}'
+        return f'{self.name}'
 
 
 class Job(models.Model):
@@ -22,7 +22,7 @@ class Job(models.Model):
     timestamp = models.DateTimeField()
 
     def __str__(self):
-        return f'{description}'
+        return f'{self.description}'
 
 class Candidate(models.Model):
     firstName = models.CharField(max_length=64 )
@@ -48,13 +48,13 @@ class Candidate(models.Model):
     timestamp = models.DateTimeField()
 
     def __str__(self):
-        return f'{firstName} {lastName} : {emailId}'
+        return f'{self.firstName} {self.lastName} : {self.emailId}'
 
 
 class Feedback(models.Model):
     feedbackId = models.AutoField(primary_key=True)
-    candidateEmail = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    interviewerCode = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    candidateEmail = models.ForeignKey(Candidate, blank=True, null=True, on_delete=models.CASCADE)
+    interviewerCode = models.ForeignKey(Employee, blank=True, null=True, on_delete=models.CASCADE)
     level = models.IntegerField(null=True)
     status_choices = [('P', 'pass'),
                         ('F', 'fail')]
@@ -64,12 +64,12 @@ class Feedback(models.Model):
     ratingCPP = models.IntegerField(null=True)
     ratingSQL = models.IntegerField(null=True)
     comments = models.TextField(max_length=500)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Result for {candidateEmail} at level {level} is {status}'
+        return f'Result for {self.candidateEmail} at level {self.level} is {self.status}'
 
-
+'''
 class CandidateJobInfo(models.Model):
     jobInfoId =  models.AutoField(primary_key=True)
     emailId = models.ForeignKey(Candidate, on_delete=models.CASCADE)
@@ -79,4 +79,5 @@ class CandidateJobInfo(models.Model):
     level3 = models.ForeignKey(Feedback, related_name='level3', null=True, on_delete = models.CASCADE)
 
     def __str__(self):
-        return f'{jobInfoId}'
+        return f'{self.jobInfoId}'
+        '''
